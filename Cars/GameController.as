@@ -15,11 +15,20 @@
 		
 		public static var instance:GameController;
 		
+		private static const CAR_COLORS:Array = [
+			new ColorTransform(0,0,1),
+			new ColorTransform(0,1,0),
+			new ColorTransform(1,0.5,0),
+			new ColorTransform(1,0,1),
+			new ColorTransform(1,0,0)
+		];		
+		
+		
 		private var gameUpdateTimer: Timer;
 		private var lobbyWaitingTimer: Timer;	
 		private var coinSpawnTimer: Timer;	
 		
-		public var defaultLobbyWaitTime:int = 20;
+		public var defaultLobbyWaitTime:int = 30;
 		public var defaultGameWaitTime:int = 120;
 		public var defaultCoinSpawnTime:int = 120;
 		
@@ -32,7 +41,7 @@
 		private var coinContainer:MovieClip;
 		private var carContainer:MovieClip;
 		
-		private var containerScalerValue:Number = 1.5;
+		private var containerScalerValue:Number = 1.15;
 		
 		//*** coinID
 		public var coinID:int = 0;
@@ -177,6 +186,7 @@
 			carContainer.addChild(playerCar);
 			playerCar.name = pPlayerName;
 			
+			
 			//trace("player Cap Init Position == X:" + playerCar.x.toString() + " Y:" + playerCar.y.toString());
 			
 			//*** Add car to array
@@ -187,7 +197,7 @@
 		}
 		
 		public function AddNewPlayers(){
-			
+			 
 			//*** Iterator
 			var i:int;
 			var oCar:DisplayObject;
@@ -197,9 +207,11 @@
 				//*** assign care
 				oCar = carContainer.getChildAt(i);
 				
+				oCar.transform.colorTransform = CAR_COLORS[i];
+				
 				if(oCar != null){
 					//*** ADD Players
-					main.instance.SendAddNewPlayer(oCar.name);
+					main.instance.SendAddNewPlayer(oCar.name,i);
 					trace(" Car name == " +oCar.name);
 					
 				}

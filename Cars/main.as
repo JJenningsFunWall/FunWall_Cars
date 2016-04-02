@@ -205,12 +205,12 @@
 				playerConnection.send("Test", "JJ's Message Recieved!!");
 			}
 		}
-		public function SendAddNewPlayer(pUserName:String){
+		public function SendAddNewPlayer(pUserName:String , pPlayerIndex:int){
 			
 			if (playerConnection) {
 				
 				trace("Adding New Player :" + pUserName);
-				playerConnection.send("AddNewPlayer", pUserName);
+				playerConnection.send("AddNewPlayer", pUserName,pPlayerIndex);
 			}
 			
 		}
